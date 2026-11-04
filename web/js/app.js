@@ -46,10 +46,10 @@ function dataModal() {
   <div style="display:flex;justify-content:space-between;align-items:center"><h2>Données</h2><button class="btn small" data-close-modal>Fermer</button></div>
   <p class="sub">Source active : <b>${esc({ preload: 'analyse préchargée', import: 'import local', zip: "ZIP d'analyse" }[s.origin] || 'aucune')}</b>${s.content_sha256 ? ` · empreinte <code>${s.content_sha256.slice(0, 16)}…</code>` : ''}</p>
   <div class="grid g2 mt">
-    <div class="card"><h3>Analyse préchargée</h3><p class="sub">Produite à partir des trois fichiers fournis.</p><button class="btn" id="openPre" ${s.preloaded_available ? '' : 'disabled'}>Ouvrir</button></div>
-    <div class="card"><h3>ZIP d'analyse</h3><p class="sub">Télécharger ou rouvrir une archive pseudonymisée.</p><a class="btn" href="/api/analysis/zip" download id="dlZip">Télécharger</a> <label class="btn">Ouvrir un ZIP<input type="file" id="zipFile" accept=".zip" hidden></label></div>
+    <div class="card"><h3>Analyse préchargée</h3><p class="sub">Les trois fichiers fournis.</p><button class="btn" id="openPre" ${s.preloaded_available ? '' : 'disabled'}>Ouvrir</button></div>
+    <div class="card"><h3>ZIP d'analyse</h3><p class="sub">Archive pseudonymisée.</p><a class="btn" href="/api/analysis/zip" download id="dlZip">Télécharger</a> <label class="btn">Ouvrir un ZIP<input type="file" id="zipFile" accept=".zip" hidden></label></div>
   </div>
-  <div class="card mt"><h3>Importer les trois Excel</h3><p class="sub">Nettoyage, rapprochements et calculs sont refaits, puis un nouveau ZIP est produit et chargé.</p>
+  <div class="card mt"><h3>Importer les trois Excel</h3>
    <div class="grid" style="grid-template-columns:90px 1fr;align-items:center;margin:8px 0">
     <label for="fmes">MES</label><input id="fmes" type="file" accept=".xlsx">
     <label for="fplm">PLM</label><input id="fplm" type="file" accept=".xlsx">
