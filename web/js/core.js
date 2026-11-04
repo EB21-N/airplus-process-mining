@@ -49,7 +49,7 @@ export function fit(person, required) {
   if (lv.some(x => x == null)) return 'competence_inconnue';
   return Math.min(...lv) === 3 ? 'fort' : 'intermediaire';
 }
-export const FIT_LABEL = { fort: 'Point fort sur ce poste', intermediaire: 'Bon niveau sur ce poste', a_renforcer: 'À renforcer sur ce poste', competence_inconnue: '', sans_repere: '' };
+export const FIT_LABEL = { fort: 'Fort sur ce poste', intermediaire: 'Moyen sur ce poste', a_renforcer: 'À renforcer sur ce poste', competence_inconnue: '', sans_repere: '' };
 export function reviewCount() {
   const A = store.analysis; const pm = Object.fromEntries(A.postes.map(p => [p.poste, p]));
   let renf = 0, inc = 0; for (const p of A.persons) { const f = fit(p, pm[posteOf(p)]?.competences_repere); if (f === 'a_renforcer') renf++; if (f === 'competence_inconnue') inc++; }
@@ -58,6 +58,8 @@ export function reviewCount() {
 
 // ---- Navigation
 export const nav = { go: () => {} };
+// Cartouche de page : reference, titre, une ligne factuelle, puis les valeurs dans une bande continue.
+export const sheet = (ref, title, lead, cells = []) => `<header class="sheet"><div class="sheet-top"><div class="sheet-ref">${esc(ref)}</div><div class="sheet-title"><h1>${esc(title)}</h1>${lead ? `<p>${lead}</p>` : ''}</div></div>${cells.length ? `<div class="sheet-cells">${cells.map(c => `<div class="cell ${c[3] ? 'accent' : ''}"><div class="l">${esc(c[0])}</div><div class="v">${esc(c[1])}</div>${c[2] ? `<div class="n">${esc(c[2])}</div>` : ''}</div>`).join('')}</div>` : ''}</header>`;
 export function toast(msg) { const t = document.getElementById('toast'); t.textContent = msg; t.classList.remove('hidden'); clearTimeout(t._h); t._h = setTimeout(() => t.classList.add('hidden'), 3500); }
 
 // ---- Provenance

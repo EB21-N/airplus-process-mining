@@ -1,39 +1,40 @@
 # Parcours de démonstration (10 minutes)
 
-**Avant de commencer** : lancez le tableau de bord. Si vous montrez l'IA, cliquez à l'avance sur **Tester le modèle** : le premier chargement peut être long.
+Avant de commencer : lancer le dashboard et, pour l'IA, ouvrir **Question**, puis **Tester le modèle** (le premier chargement peut être long).
 
-## 1. Pilotage : ce qui ralentit (2 min)
+## 1. Temps (2 min)
 
-1. Lisez le titre : l'assemblage a pris 8 h 58 de plus que prévu, soit +41 %.
-2. Regardez « Le temps, poste par poste », puis les cartes « Les postes à regarder d'abord ». Le poste 31 arrive en tête.
-3. Cliquez sur « Train gauche » dans « Où va le temps en plus » : tous les chiffres suivent.
-4. Descendez jusqu'au coût : 21,1 M€ de pièces et 3 297,68 € de main-d'œuvre.
+1. Bande de valeurs : 21 h 50 prévues, 30 h 48 réalisées, écart +8 h 58 (+41 %).
+2. Turbine : le noir est le prévu, le rouge le dépassement. Survoler une ligne de la table allume la pale.
+3. Cliquer sur la ligne du poste 31 : pointage arrêté à 17:00, 1 h 57 hors pointage.
+4. **Zones**, **Aléas**, **Écarts** : les pales se réorganisent. Cliquer sur une zone : tout se filtre.
+5. Descendre : déroulé jour par jour, écarts par zone et par aléa, main-d'œuvre par zone.
 
-## 2. Supply chain : d'où viennent les pièces (3 min)
+## 2. Pièces (3 min)
 
-1. Lisez le titre : 89 % de la valeur repose sur trois fournisseurs, et deux références pèsent 81,5 %.
-2. Cliquez sur **Safran Engines** : sa fiche s'ouvre et toute la page se concentre sur lui.
-3. Montrez « Le chemin des pièces » en nombre de pièces, puis en valeur.
-4. Dans le rétro-planning, passez sur le moteur : à commander le 19 juillet 2023 pour le poste 27.
-5. Terminez sur « Les postes qui dépendent le plus des fournisseurs ».
+1. Bande de valeurs : 21,1 M€, top 3 à 89 %, classe A à 81,5 %.
+2. Onglet **Fournisseurs**, ligne **Safran Engines** : la fiche s'ouvre et le reste s'efface.
+3. **Délai**, **Commandes**, **Flux** : les mêmes disques se replacent.
+4. Onglet **Postes** : qui dépend de quelle pièce la plus longue à obtenir.
+5. Descendre : criticité × délai, écarts nomenclature / MES, ABC.
 
-## 3. Jumeau 3D : où cela se passe (2 min)
+## 3. Avion (2 min)
 
-1. **Avion 3D** : tournez l'avion, changez le signal, cliquez sur une pièce.
-2. Depuis la fiche, ouvrez un poste : **Atelier 3D & Ishikawa** s'ouvre sur ce poste.
-3. Cliquez sur la branche **Machine** de l'Ishikawa, puis sur un aléa.
+1. Survoler une ligne de la table : la pièce s'allume sur l'avion. Cliquer sur une pièce.
+2. **Atelier** : cliquer sur le poste 31.
+3. **Ishikawa** : cliquer sur **Machine**, puis sur un aléa. **Catalogue** : toutes les colonnes, triables.
 
-## 4. Équipe : qui travaille où (1 min 30)
+## 4. Équipe (1 min 30)
 
-1. Lisez le graphique des compétences.
-2. Cliquez sur le poste 31 à droite : les fiches se filtrent.
-3. Changez le poste d'une personne. Dans Pilotage, le coût main-d'œuvre change.
-4. **Rétablir les affectations** : retour aux valeurs d'origine.
+1. Mur d'empreintes : une branche par compétence, en rouge au niveau 3.
+2. Cliquer sur **Soudure**, puis sur la case **À renforcer**.
+3. Ouvrir une empreinte et changer son poste. Dans **Temps**, le coût main-d'œuvre change.
+4. Cliquer sur la case **Déplacées** pour revenir à l'ERP.
 
-## 5. Aide à la décision : que faire (1 min 30)
+## 5. Question (1 min 30)
 
-Cliquez sur une question proposée ou posez la vôtre. Montrez les trois étapes, les sources cliquables et les affirmations écartées par les contrôles.
+Choisir une question proposée ou écrire la sienne. Montrer les trois étapes, les citations et les affirmations écartées.
 
-## Conclusion
+## Pour finir
 
-Air+ montre où regarder et quoi commander en premier, à partir de ce que disent réellement les données.
+`Ctrl K` retrouve n'importe quel poste, pièce, fournisseur ou personne. `Sources` : import, ZIP et contrôles.

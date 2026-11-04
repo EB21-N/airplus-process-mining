@@ -37,7 +37,7 @@ Date : 04/11/2026. Machine : Windows 11, 16 Go de RAM. Le script `tests/run_e2e.
 | Main-d'œuvre, poste 31 | `MES!L32`, 3 lignes ERP | 114,50 €/h × 7 665 s | 243,79 € |
 | Main-d'œuvre, total | MES et ERP | Somme des 56 opérations | 3 297,68 € |
 
-Affectation modifiée (une personne du poste 31 vers le 27) : 3 269,40 €, écart −28,28 € conforme au calcul. Après « Rétablir les affectations » : 3 297,68 €.
+Affectation modifiée (une personne du poste 31 vers le 27) : 3 269,40 €, écart −28,28 € conforme au calcul. Après retour aux affectations ERP : 3 297,68 €.
 
 ## Limite observée sur l'IA
 

@@ -27,7 +27,7 @@ def main(out, stp, gltf, xml):
         for dp, dn, fn in os.walk(ROOT):
             dn[:] = sorted(d for d in dn if d not in EXCLUDE_DIRS)
             for f in sorted(fn):
-                if f.endswith((".xlsx", ".pyc")):
+                if f.endswith((".xlsx", ".pyc")) or f == ".git":
                     continue
                 full = os.path.join(dp, f); rel = os.path.relpath(full, ROOT).replace(os.sep, "/")
                 info = zipfile.ZipInfo("AirPlus/" + rel, (2026, 11, 4, 12, 0, 0)); info.compress_type = zipfile.ZIP_DEFLATED

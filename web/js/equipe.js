@@ -1,68 +1,71 @@
-import { api, displayName, dur, esc, FIT_LABEL, fit, onChange, posteOf, resetAssignments, reviewCount, setAssignment, src, store, teamOf, toast } from './core.js';
+// Equipe : valeurs en bande, mur d'empreintes, table reliee, competences et rotations en dessous.
+import { api, displayName, dur, esc, FIT_LABEL, fit, onChange, posteOf, resetAssignments, reviewCount, store, teamOf, tipAttr, toast } from './core.js';
+import { glyph, SKILLS } from './sheets.js';
+import { dataTable, kband } from './table.js';
 
-const T = { q: '', poste: null, review: false };
-const LV = n => `<span class="lvl" role="img" aria-label="niveau ${n} sur 3">${[1, 2, 3].map(i => `<i class="${i <= n ? 'on' : ''}"></i>`).join('')}</span>`;
-const initials = name => name.replace(/\./g, ' ').split(/\s+/).filter(Boolean).slice(0, 2).map(w => w[0].toUpperCase()).join('');
+const E = { mode: 'poste', skill: null, review: false, tab: 'people', hover: null };
+let unsub = null, tbl = null;
+const MODES = [['poste', 'Par poste'], ['exp', 'Par expérience']];
+const TABS = [['people', 'Personnes'], ['postes', 'Postes']];
+const pmap = () => Object.fromEntries(store.analysis.postes.map(p => [p.poste, p]));
+const fitTag = f => f === 'fort' ? '<span class="pill ink">Fort</span>' : f === 'a_renforcer' ? '<span class="pill red">À renforcer</span>' : f === 'intermediaire' ? '<span class="pill">Moyen</span>' : '';
 
 export function renderEquipe(root, route) {
-  if (route.arg?.poste) { T.poste = route.arg.poste; route.arg = null; }
-  root.innerHTML = `<section class="hero" id="tHero"></section>
-    <div class="filters"><input id="tQ" type="search" aria-label="Rechercher" placeholder="Rechercher une personne, une compétence, un poste" value="${esc(T.q)}" style="width:min(340px,100%)">
-    <button id="tReview" class="chip ${T.review ? 'on' : ''}" aria-pressed="${T.review}"></button><button class="btn small" id="tClear">Tout afficher</button><button class="btn small" id="tReset">Rétablir les affectations</button>
-    <span style="margin-left:auto;display:flex;gap:6px;align-items:center" id="revealBox"></span></div>
-    <div class="team"><div class="people" id="tPeople"></div><div class="card" style="padding:0;align-self:start;position:sticky;top:124px;max-height:calc(100vh - 138px);overflow:auto"><div class="stickyhead" style="padding:12px 14px;border-bottom:1px solid var(--line)"><h2>Les postes</h2><p class="sub">Cliquez pour voir qui y travaille. Le temps affiché est celui de l'opération au MES.</p></div><div id="tPostes"></div></div></div>`;
-  document.getElementById('tQ').oninput = e => { T.q = e.target.value; people(); };
-  document.getElementById('tReview').onclick = () => { T.review = !T.review; header(); people(); };
-  document.getElementById('tClear').onclick = () => { T.q = ''; T.poste = null; T.review = false; renderEquipe(root, {}); };
-  document.getElementById('tReset').onclick = () => { resetAssignments(); toast('Affectations d\'origine rétablies.'); all(); };
-  document.getElementById('tPostes').onclick = e => { const r = e.target.closest('[data-p]'); if (r) { T.poste = T.poste === +r.dataset.p ? null : +r.dataset.p; postes(); people(); } };
-  document.getElementById('tPeople').onchange = e => { const s = e.target.closest('[data-assign]'); if (s) { setAssignment(s.dataset.assign, +s.value); all(); } };
-  const all = () => { hero(); header(); postes(); people(); };
-  reveal(); all();
+  if (route.arg?.poste) route.arg = null;
+  if (unsub) unsub();
+  unsub = onChange(k => { if (k === 'assign') { band(); drawWall(); drawTable(); more(); } if (k === 'select') { marks(); tbl?.mark(); } });
+  root.innerHTML = `<div id="eBand"></div><div class="work"><section class="panel"><div class="tools"><div class="modes" id="eModes"></div><div class="modes" id="eSkills" role="group" aria-label="Compétence"></div></div><div class="wall" id="eWall"></div></section><section class="panel"><div class="tools"><div class="tabs" id="eTabs"></div><div class="right" id="eReveal"></div></div><div class="tablewrap" id="eTable"></div></section></div><div class="more" id="eMore"></div>`;
+  document.getElementById('eModes').onclick = e => { const b = e.target.closest('[data-m]'); if (b) { E.mode = b.dataset.m; tools(); drawWall(); } };
+  document.getElementById('eSkills').onclick = e => { const b = e.target.closest('[data-skill]'); if (b) { E.skill = E.skill === b.dataset.skill ? null : b.dataset.skill; tools(); drawWall(); drawTable(); more(); } };
+  document.getElementById('eTabs').onclick = e => { const b = e.target.closest('[data-tab]'); if (b) { E.tab = b.dataset.tab; tools(); drawTable(); } };
+  document.getElementById('eBand').addEventListener('click', e => { if (e.target.closest('[data-review]')) { E.review = !E.review; band(); drawWall(); drawTable(); } if (e.target.closest('[data-reset]')) { resetAssignments(); toast('Affectations ERP rétablies.'); } });
+  band(); tools(); drawWall(); drawTable(); more(); reveal();
 }
-function hero() {
-  const A = store.analysis; const skills = [...new Set(A.skills.map(s => s.competence))].sort();
-  const rows = skills.map(s => { const L = A.skills.filter(x => x.competence === s); return { s, n: L.length, c: [1, 2, 3].map(l => L.filter(x => x.niveau === l).length) }; }).sort((a, b) => b.c[2] - a.c[2]);
-  const m = Math.max(...rows.map(r => r.n)); const col = ['var(--c-moyenne)', 'var(--c-haute)', 'var(--c-critique)'];
-  const c = reviewCount(); const exp = l => A.persons.filter(p => p.experience === l).length;
-  document.getElementById('tHero').innerHTML = `<div><h1>${A.persons.length} personnes sur <em>${A.postes.length} postes</em>.</h1><p>${exp('Expert')} experts, ${exp('Confirmé')} confirmés et ${exp('Débutant')} débutants. ${c.renf ? `${c.renf} personnes occupent un poste dont une compétence clé est déclarée au niveau 1 : à regarder ensemble.` : 'Aucune personne n\'occupe un poste dont une compétence clé est déclarée au niveau 1.'}</p><p class="sub">Le lien entre compétence et poste vient des mots de l'intitulé d'opération. C'est un repère à confirmer sur le terrain. Un niveau déclaré ne mesure pas la performance.</p></div>
-   <div><div class="legend" style="margin-top:0"><span><b>Compétences déclarées</b></span>${['Niveau 1', 'Niveau 2', 'Niveau 3'].map((l, i) => `<span><i style="background:${col[i]}"></i>${l}</span>`).join('')}</div>${rows.map(r => `<div class="bar-row" style="grid-template-columns:130px 1fr 30px"><span>${esc(r.s)}</span><div style="display:flex;gap:2px;height:13px;width:${r.n / m * 100}%">${r.c.map((v, i) => `<div style="flex:${v};background:${col[i]};border-radius:3px" data-tip="${esc(r.s)}, niveau ${i + 1} : ${v} personnes"></div>`).join('')}</div><span class="val">${r.n}</span></div>`).join('')}</div>`;
+function band() {
+  const A = store.analysis; const el = document.getElementById('eBand'); if (!el) return; const c = reviewCount(); const exp = l => A.persons.filter(p => p.experience === l).length; const n = Object.keys(store.overrides).length;
+  const avg = A.persons.reduce((s, p) => s + (p.taux_horaire_eur || 0), 0) && null; void avg;
+  el.innerHTML = kband([{ l: 'Effectif', v: String(A.persons.length), n: `${A.postes.length} postes` }, { l: 'Experts', v: String(exp('Expert')), n: `${Math.round(exp('Expert') / A.persons.length * 100)} %` }, { l: 'Confirmés', v: String(exp('Confirmé')), n: `${Math.round(exp('Confirmé') / A.persons.length * 100)} %` }, { l: 'Débutants', v: String(exp('Débutant')), n: `${Math.round(exp('Débutant') / A.persons.length * 100)} %` }, { l: 'À renforcer', v: String(c.renf), n: E.review ? 'filtre actif, cliquer pour retirer' : 'niveau 1 sur le poste, cliquer pour filtrer', sig: E.review || c.renf > 0, attr: 'data-review tabindex="0" role="button" style="cursor:pointer"' }, { l: 'Déplacées', v: String(n), n: n ? 'cliquer pour revenir à l\'ERP' : 'affectations ERP', attr: n ? 'data-reset tabindex="0" role="button" style="cursor:pointer"' : '' }]);
 }
-function header() { const c = reviewCount(); const b = document.getElementById('tReview'); if (b) { b.textContent = `À regarder ensemble : ${c.renf}`; b.classList.toggle('on', T.review); b.setAttribute('aria-pressed', T.review); } }
-function postes() {
-  const A = store.analysis; const el = document.getElementById('tPostes');
-  el.innerHTML = A.postes.map(p => { const o = A.operations.find(x => x.poste === p.poste); const team = teamOf(p.poste); const ch = team.some(x => store.overrides[x.person_id]) || A.persons.some(x => x.poste_origine === p.poste && store.overrides[x.person_id]);
-    return `<div class="poste-row ${T.poste === p.poste ? 'sel' : ''}" data-p="${p.poste}" tabindex="0" role="button"><b>P${p.poste}</b><div>${esc(p.intitule)}<br><span class="sub">${team.length ? team.map(x => esc(displayName(x))).join(', ') : 'Personne pour le moment'}</span>${ch ? ' <span class="tag session">modifié</span>' : ''}</div><div style="text-align:right"><b>${team.length}</b><br><span class="sub">${dur(o.reel_s)}</span></div></div>`; }).join('');
-}
-function people() {
-  const A = store.analysis; const q = T.q.toLowerCase(); const pm = Object.fromEntries(A.postes.map(p => [p.poste, p]));
-  const shown = A.persons.filter(p => {
-    if (T.poste && posteOf(p) !== T.poste) return false;
-    if (T.review && fit(p, pm[posteOf(p)]?.competences_repere) !== 'a_renforcer') return false;
-    return !q || `${displayName(p)} ${p.person_id} ${p.qualification} ${p.experience} ${Object.keys(p.competences).join(' ')} ${p.habilitations.join(' ')} poste ${posteOf(p)}`.toLowerCase().includes(q);
-  });
-  const el = document.getElementById('tPeople');
-  const opts = A.postes.map(x => `<option value="${x.poste}">Poste ${x.poste} — ${esc(x.intitule)}</option>`).join('');
-  el.innerHTML = shown.length ? shown.map(p => card(p, pm, opts)).join('') : '<div class="card">Personne ne correspond à ce filtre.</div>';
-  el.querySelectorAll('[data-assign]').forEach(s => { s.value = String(posteOf(A.persons.find(x => x.person_id === s.dataset.assign))); });
-}
-function card(p, pm, opts) {
-  const sel = posteOf(p); const changed = sel !== p.poste_origine; const f = fit(p, pm[sel]?.competences_repere); const name = displayName(p);
-  const strong = store.analysis.postes.filter(x => fit(p, x.competences_repere) === 'fort').length;
-  const rot = store.analysis.rotations.filter(r => r.person_id === p.person_id);
-  return `<article class="person ${changed ? 'changed' : ''} ${f === 'fort' ? 'fort' : ''}"><div class="person-head"><div class="avatar" aria-hidden="true">${esc(initials(name))}</div><div><h3>${esc(name)}</h3><div class="sub">${esc(p.qualification)} · ${esc(p.experience)}</div></div></div>
-   <label class="sub">Poste <span title="Poste d'origine à l'ERP : P${p.poste_origine}">(à l'origine : P${p.poste_origine})</span><select data-assign="${p.person_id}" style="width:100%;margin-top:3px">${opts}</select></label>
-   <p style="margin:6px 0 0">${FIT_LABEL[f] ? `<span class="tag ${f}">${FIT_LABEL[f]}</span>` : ''}${changed ? '<span class="tag session">modifié</span>' : ''}${strong ? `<span class="tag">Point fort sur ${strong} poste${strong > 1 ? 's' : ''}</span>` : ''}</p>
-   <div class="skills">${Object.entries(p.competences).sort((a, b) => b[1] - a[1]).map(([s, n]) => `<span>${esc(s)}</span>${LV(n)}`).join('')}</div>
-   <div>${p.habilitations.map(h => `<span class="tag">${esc(h)}</span>`).join('')}</div>
-   <div class="sub" style="margin-top:5px">${rot.length ? 'Rotations : ' + rot.map(r => `semaine ${r.semaine} au P${r.poste}`).join(', ') : ''}</div>
-   <details class="sub" style="margin-top:4px"><summary>Parcours et source</summary>${p.commentaire_carriere ? esc(p.commentaire_carriere) + '<br>' : ''}<span class="pid">${p.person_id}</span> ${src(p.src)}</details></article>`;
+function tools() {
+  document.getElementById('eModes').innerHTML = MODES.map(([k, l]) => `<button class="${E.mode === k ? 'on' : ''}" data-m="${k}">${l}</button>`).join('');
+  document.getElementById('eSkills').innerHTML = SKILLS.map(s => `<button class="${E.skill === s ? 'on' : ''}" data-skill="${esc(s)}" aria-pressed="${E.skill === s}">${esc(s)}</button>`).join('');
+  document.getElementById('eTabs').innerHTML = TABS.map(([k, l]) => `<button class="${E.tab === k ? 'on' : ''}" data-tab="${k}">${l}</button>`).join('');
 }
 function reveal() {
-  const box = document.getElementById('revealBox'); const can = store.state?.can_reveal;
-  if (store.names) { box.innerHTML = `<span class="badge warn">Noms affichés sur cet écran</span><button class="btn small" id="hide">Masquer</button>`; document.getElementById('hide').onclick = () => { store.names = null; renderEquipe(document.getElementById('view'), {}); }; return; }
-  if (!can) { box.innerHTML = ''; return; }
-  box.innerHTML = `<input id="code" type="password" aria-label="Code d'affichage des noms" placeholder="Code" style="width:74px" autocomplete="off"><button class="btn small" id="doReveal">Afficher les noms</button>`;
-  document.getElementById('doReveal').onclick = async () => { try { const r = await api('/api/reveal', { code: document.getElementById('code').value }); store.names = r.names; renderEquipe(document.getElementById('view'), {}); } catch (e) { toast(e.message); } };
+  const box = document.getElementById('eReveal'); if (!box) return;
+  const redraw = () => { reveal(); drawWall(); drawTable(); };
+  if (store.names) { box.innerHTML = `<button class="link" id="eHide">Masquer les noms</button>`; document.getElementById('eHide').onclick = () => { store.names = null; redraw(); }; return; }
+  if (!store.state?.can_reveal) { box.innerHTML = ''; return; }
+  box.innerHTML = `<input id="eCode" type="password" aria-label="Code" placeholder="Code" style="width:58px;border:1px solid var(--hair2);background:none;padding:1px 5px" autocomplete="off"><button class="link" id="eShow">Afficher les noms</button>`;
+  document.getElementById('eShow').onclick = async () => { try { const r = await api('/api/reveal', { code: document.getElementById('eCode').value }); store.names = r.names; redraw(); } catch (e) { toast(e.message); } };
 }
-void onChange;
+function matches(p, pm) {
+  if (E.review && fit(p, pm[posteOf(p)]?.competences_repere) !== 'a_renforcer') return false;
+  if (E.skill && !p.competences[E.skill]) return false;
+  return true;
+}
+const fpHtml = (p, pm) => { const changed = store.overrides[p.person_id] != null; const f = fit(p, pm[posteOf(p)]?.competences_repere); return `<button class="fp ${changed ? 'changed' : ''} ${matches(p, pm) ? '' : 'dim'}" data-open="person:${p.person_id}" data-pid="${p.person_id}" aria-label="${esc(displayName(p))}, ${esc(p.qualification)}" ${tipAttr(`<b>${esc(displayName(p))}</b> ${esc(p.qualification)}<br>${esc(Object.entries(p.competences).map(([s, n]) => `${s} ${n}`).join(', '))}${FIT_LABEL[f] ? `<br>${FIT_LABEL[f]}` : ''}`)}>${glyph(p, { skill: E.skill })}<span>${esc(displayName(p))}</span></button>`; };
+function drawWall() {
+  const A = store.analysis; const el = document.getElementById('eWall'); if (!el) return; const pm = pmap(); const top = el.scrollTop;
+  if (E.mode === 'exp') el.innerHTML = ['Expert', 'Confirmé', 'Débutant'].map(l => { const L = A.persons.filter(p => p.experience === l); return `<div class="group wide"><b>${l}, ${L.length}</b><div class="gl">${L.map(p => fpHtml(p, pm)).join('')}</div></div>`; }).join('');
+  else el.innerHTML = A.postes.map(x => { const t = teamOf(x.poste); const o = A.operations.find(a => a.poste === x.poste); return `<div class="group"><b><button data-open="poste:${x.poste}" ${tipAttr(`${esc(x.intitule)}<br>Opération : ${dur(o.reel_s)}`)}>P${x.poste}</button></b><div class="gl">${t.length ? t.map(p => fpHtml(p, pm)).join('') : '<span class="fp"></span>'}</div></div>`; }).join('');
+  el.scrollTop = top; marks();
+}
+function drawTable() {
+  const A = store.analysis; const old = document.getElementById('eTable'); if (!old) return; const fresh = old.cloneNode(false); old.replaceWith(fresh); const pm = pmap();
+  if (E.tab === 'people') tbl = dataTable(fresh, { search: 'Filtrer : nom, qualification, compétence, habilitation', sort: 3, key: p => p.person_id, rows: () => A.persons.filter(p => matches(p, pm)), attr: p => `data-open="person:${p.person_id}"`, selected: () => store.sel?.type === 'person' ? store.sel.id : null, onHover: k => { document.querySelectorAll('.fp').forEach(f => f.classList.toggle('hot', f.dataset.pid === k)); },
+    cols: [{ t: 'Personne', v: p => displayName(p) }, { t: 'Qualification', v: p => p.qualification, c: true }, { t: 'Expérience', v: p => p.experience }, { t: 'Poste', v: p => posteOf(p), n: true, h: p => `${posteOf(p)}${store.overrides[p.person_id] ? ' <span class="pill red">déplacé</span>' : ''}` }, { t: 'Sur le poste', v: p => fit(p, pm[posteOf(p)]?.competences_repere), h: p => fitTag(fit(p, pm[posteOf(p)]?.competences_repere)) }, { t: 'Compétences', v: p => Object.entries(p.competences).map(([s, n]) => `${s} ${n}`).join(' ') + ' ' + p.habilitations.join(' '), c: true, h: p => esc(Object.entries(p.competences).map(([s, n]) => `${s} ${n}`).join(', ')) }] });
+  else tbl = dataTable(fresh, { search: 'Filtrer : poste, opération', sort: 0, key: x => x.poste, rows: () => A.postes, attr: x => `data-open="poste:${x.poste}"`, selected: () => store.sel?.type === 'poste' ? store.sel.id : null,
+    cols: [{ t: 'P', v: x => x.poste, n: true }, { t: 'Opération', v: x => x.intitule, c: true }, { t: 'Effectif', v: x => teamOf(x.poste).length, n: true }, { t: 'Profils', v: x => teamOf(x.poste).map(displayName).join(', '), c: true }, { t: 'Compétences repère', v: x => (x.competences_repere || []).join(', '), c: true }, { t: 'Temps MES', v: x => A.operations.find(o => o.poste === x.poste).reel_s, n: true, h: x => dur(A.operations.find(o => o.poste === x.poste).reel_s) }] });
+}
+function marks() { const sel = store.sel?.type === 'person' ? store.sel.id : null; document.querySelectorAll('.fp').forEach(f => f.classList.toggle('sel', f.dataset.pid === sel)); }
+function more() {
+  const A = store.analysis; const el = document.getElementById('eMore'); if (!el) return; const col = ['#c9c2b6', 'var(--ink)', 'var(--red)'];
+  const rows = SKILLS.map(s => { const L = A.skills.filter(x => x.competence === s); return { s, n: L.length, k: [1, 2, 3].map(v => L.filter(x => x.niveau === v).length) }; }); const m = Math.max(...rows.map(r => r.n));
+  const hab = {}; A.persons.forEach(p => p.habilitations.forEach(h => { hab[h] = (hab[h] || 0) + 1; })); const he = Object.entries(hab).sort((a, b) => b[1] - a[1]); const mh = Math.max(...he.map(x => x[1]));
+  const qual = {}; A.persons.forEach(p => { qual[p.qualification] = (qual[p.qualification] || 0) + 1; }); const qe = Object.entries(qual).sort((a, b) => b[1] - a[1]);
+  el.innerHTML = `<div class="g3"><div class="card"><h2>Compétences déclarées <small>clair : niveau 1, noir : 2, rouge : 3</small></h2>${rows.map(r => `<button class="barrow ${E.skill === r.s ? 'on' : ''}" data-skillrow="${esc(r.s)}" style="grid-template-columns:130px 1fr 34px"><span>${esc(r.s)}</span><div class="st" style="width:${r.n / m * 100}%">${r.k.map((v, i) => `<i style="flex:${v};background:${col[i]};height:10px" data-tip="Niveau ${i + 1} : ${v}"></i>`).join('')}</div><em>${r.n}</em></button>`).join('')}<p class="sub" style="margin-top:6px">Compétences attendues déduites de l'intitulé du poste, à confirmer en atelier.</p></div>
+   <div class="card"><h2>Habilitations</h2>${he.map(([h, v]) => `<div class="barrow"><span>${esc(h)}</span><i style="width:${v / mh * 100}%"></i><em>${v}</em></div>`).join('')}</div>
+   <div class="card"><h2>Qualifications</h2><div class="scrollbox" style="max-height:230px">${qe.map(([q, v]) => `<div class="row"><span>${esc(q)}</span><em>${v}</em></div>`).join('')}</div></div></div>`;
+  el.querySelectorAll('[data-skillrow]').forEach(b => b.onclick = () => { E.skill = E.skill === b.dataset.skillrow ? null : b.dataset.skillrow; tools(); drawWall(); drawTable(); more(); window.scrollTo({ top: 0, behavior: 'smooth' }); });
+}

@@ -1,18 +1,22 @@
-# Air+ : comprendre ce qui ralentit l'assemblage
+# Air+
 
-Air+ est un tableau de bord local de process mining. Il relie les données de production (MES), de nomenclature (PLM) et d'équipes (ERP) pour montrer où le temps part, d'où viennent les pièces, qui travaille où, et pour poser des questions à une IA qui cite ses sources.
+Process mining de la ligne d'assemblage, à partir des extraits MES, PLM et ERP. Application locale : le serveur écoute uniquement sur `127.0.0.1`.
 
-Tout tourne sur votre ordinateur : le serveur écoute uniquement sur `127.0.0.1`, rien ne sort de la machine.
+## Espaces
 
-## Ce que l'on y trouve
+Chaque espace s'organise de la même façon : une bande de valeurs en haut, le graphique à gauche, une table triable et filtrable à droite, reliée au graphique, et les vues détaillées en dessous. Un clic ouvre la fiche.
 
-| Espace | Pour répondre à |
-|---|---|
-| **Pilotage** | Combien de temps en plus, où, à quels postes, et ce que cela coûte |
-| **Supply chain** | Qui livre quoi, combien cela pèse, quand commander, quels postes en dépendent |
-| **Jumeau 3D** | Voir les pièces sur l'avion, les postes dans l'atelier, l'Ishikawa, le catalogue |
-| **Équipe** | Qui est sur quel poste, avec quelles compétences. Modifier une affectation recalcule tout |
-| **Aide à la décision** | Poser une question libre à une IA locale, qui répond avec ses sources |
+| Espace | Graphique | Tables et vues détaillées |
+|---|---|---|
+| **Temps** | Turbine des 56 opérations, par déroulé, zones, aléas, écarts | Opérations, déroulé jour par jour, écart par zone et par aléa, main-d'œuvre par zone |
+| **Pièces** | Disques de la valeur, délais, commandes, flux | Références, fournisseurs, commandes, postes, criticité × délai, écarts nomenclature / MES, ABC |
+| **Avion** | Modèle 3D, atelier schématique, Ishikawa 6M | Pièces, postes, aléas, catalogue complet |
+| **Équipe** | Mur des 150 empreintes de compétences | Personnes, postes, compétences, habilitations, qualifications |
+| **Question** | Ollama en local, réponses avec citations | Journal de la chaîne, lignes sources |
+
+`Sources`, dans le bandeau : import des Excel, ZIP d'analyse, rapprochements, contrôles et journal.
+
+Raccourcis : `1` à `5` pour les espaces, `Ctrl K` ou `/` pour chercher, `←` `→` dans une fiche, `Échap` pour fermer.
 
 ## Lancer
 
@@ -35,12 +39,12 @@ Le navigateur s'ouvre sur l'analyse préchargée.
 ## Activer l'IA (facultatif)
 
 1. Installez [Ollama](https://ollama.com) et lancez-le.
-2. Dans **Aide à la décision > Réglages**, saisissez un modèle, puis **Télécharger le modèle** s'il manque.
+2. Dans **Question**, ouvrez les réglages Ollama, saisissez un modèle, puis **Télécharger le modèle** s'il manque.
 3. Cliquez sur **Tester le modèle**.
 
 ## Utiliser vos propres fichiers
 
-Bouton **Données** : sélectionnez les trois Excel MES, PLM et ERP. Air+ refait tous les calculs, produit un ZIP d'analyse et le charge. Ce ZIP se partage et se rouvre.
+Page **Sources** : sélectionnez les trois Excel MES, PLM et ERP. Air+ refait tous les calculs, produit un ZIP d'analyse et le charge. Ce ZIP se partage et se rouvre.
 
 Les personnes apparaissent sous la forme Prénom.I. Après un import local, le code `1234` affiche les noms sur l'écran : ils restent en mémoire et n'entrent jamais dans le ZIP ni dans l'IA.
 
@@ -66,14 +70,14 @@ python -m airplus analyze --mes MES.xlsx --plm PLM.xlsx --erp ERP.xlsx --out ana
 
 Le ZIP d'analyse suit les phases du challenge : `1_DISCOVER`, `2_DEFINE`, `3_DESIGN`, `4_DELIVER`. Son dictionnaire est dans `4_DELIVER/4.3_documentation/DICTIONNAIRE.md`.
 
-## Comment lire les chiffres
+## Règles de calcul
 
-- Chaque chiffre remonte à une ligne de l'un des fichiers : cliquez sur une étiquette de source.
-- Un aléa est ce que l'équipe a déclaré. Une « cause possible » reste une hypothèse à vérifier.
-- Le coût main-d'œuvre compte toute l'équipe du poste pendant toute l'opération.
-- Le plan de l'atelier est schématique : les postes sont rangés par zone.
-- Le rétro-planning part de la première date d'usage au MES et du délai le plus long du PLM.
-- Les réponses de l'IA se vérifient : elle cite ses sources, et le serveur écarte ce qu'il ne retrouve pas dans les données. Sa qualité dépend du modèle choisi.
+- Réalisé : colonne Temps Réel du MES. Pointage : Heure Fin − Heure Début. Sur 3 postes, la fin est pointée à 17:00 et le temps déclaré dépasse le pointage (P15, P31, P50).
+- Aléa : valeur déclarée au MES. Cause possible : colonne Cause Potentielle, hypothèse à vérifier.
+- Coût main-d'œuvre : durée × somme des taux de l'équipe du poste, équipe complète sur toute l'opération.
+- Atelier 3D : plan schématique, postes rangés par zone.
+- Rétro-planning : premier usage au MES − délai maxi du PLM.
+- IA : le serveur écarte les citations inexistantes et les chiffres absents des sources citées. La qualité des réponses dépend du modèle.
 
 ## Tests
 
