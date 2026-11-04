@@ -1,0 +1,613 @@
+{
+ "document": "meccano dreamliner.pdf",
+ "pages": 45,
+ "nomenclature": [
+  {
+   "ref": "D119",
+   "qty": 1,
+   "repere_visuel": "coiffe de nez",
+   "page": 43,
+   "bbox_pt": [
+    222.8,
+    76.5,
+    261.5,
+    88.5
+   ],
+   "ocr_brut": "D119 x11",
+   "citation": "NOTICE!p43!D119",
+   "lecture": "transcription visuelle, OCR conserve"
+  },
+  {
+   "ref": "D120",
+   "qty": 1,
+   "repere_visuel": "coiffe de nez",
+   "page": 43,
+   "bbox_pt": [
+    222.8,
+    130.0,
+    261.8,
+    142.0
+   ],
+   "ocr_brut": "D120 x11",
+   "citation": "NOTICE!p43!D120",
+   "lecture": "transcription visuelle, OCR conserve"
+  },
+  {
+   "ref": "D145",
+   "qty": 1,
+   "repere_visuel": "demi-coque arriere",
+   "page": 43,
+   "bbox_pt": [
+    221.2,
+    187.9,
+    259.9,
+    199.9
+   ],
+   "ocr_brut": "D145 x11",
+   "citation": "NOTICE!p43!D145",
+   "lecture": "transcription visuelle, OCR conserve"
+  },
+  {
+   "ref": "D144",
+   "qty": 1,
+   "repere_visuel": "demi-coque arriere",
+   "page": 43,
+   "bbox_pt": [
+    223.3,
+    245.2,
+    260.6,
+    257.2
+   ],
+   "ocr_brut": "D144 x1",
+   "citation": "NOTICE!p43!D144",
+   "lecture": "transcription visuelle, OCR conserve"
+  },
+  {
+   "ref": "D142",
+   "qty": 4,
+   "repere_visuel": "demi-coque nacelle",
+   "page": 43,
+   "bbox_pt": [
+    223.6,
+    299.7,
+    262.4,
+    311.7
+   ],
+   "ocr_brut": "D142 x4",
+   "citation": "NOTICE!p43!D142",
+   "lecture": "transcription visuelle, OCR conserve"
+  },
+  {
+   "ref": "D088",
+   "qty": 6,
+   "repere_visuel": "demi-coque fuselage",
+   "page": 43,
+   "bbox_pt": [
+    223.8,
+    360.4,
+    262.5,
+    373.4
+   ],
+   "ocr_brut": "poss x6",
+   "citation": "NOTICE!p43!D088",
+   "lecture": "transcription visuelle, OCR conserve"
+  },
+  {
+   "ref": "D122",
+   "qty": 2,
+   "repere_visuel": "plaque perforee",
+   "page": 43,
+   "bbox_pt": [
+    223.8,
+    409.9,
+    262.6,
+    421.9
+   ],
+   "ocr_brut": "D122 x2",
+   "citation": "NOTICE!p43!D122",
+   "lecture": "transcription visuelle, OCR conserve"
+  },
+  {
+   "ref": "D278",
+   "qty": 1,
+   "repere_visuel": "plaque triangulaire",
+   "page": 43,
+   "bbox_pt": [
+    224.0,
+    454.5,
+    261.3,
+    467.5
+   ],
+   "ocr_brut": "D278 x1",
+   "citation": "NOTICE!p43!D278",
+   "lecture": "transcription visuelle, OCR conserve"
+  },
+  {
+   "ref": "D116",
+   "qty": 2,
+   "repere_visuel": "plaque triangulaire",
+   "page": 43,
+   "bbox_pt": [
+    224.0,
+    493.2,
+    262.7,
+    505.2
+   ],
+   "ocr_brut": "D116 x2",
+   "citation": "NOTICE!p43!D116",
+   "lecture": "transcription visuelle, OCR conserve"
+  },
+  {
+   "ref": "D117",
+   "qty": 2,
+   "repere_visuel": "plaque triangulaire",
+   "page": 43,
+   "bbox_pt": [
+    224.3,
+    535.9,
+    262.8,
+    547.9
+   ],
+   "ocr_brut": "D117 x2",
+   "citation": "NOTICE!p43!D117",
+   "lecture": "transcription visuelle, OCR conserve"
+  },
+  {
+   "ref": "D234",
+   "qty": 1,
+   "repere_visuel": "boitier electronique",
+   "page": 43,
+   "bbox_pt": [
+    499.3,
+    79.6,
+    538.2,
+    91.6
+   ],
+   "ocr_brut": "0234 «11",
+   "citation": "NOTICE!p43!D234",
+   "lecture": "transcription visuelle, OCR conserve"
+  },
+  {
+   "ref": "A018",
+   "qty": 5,
+   "repere_visuel": "axe 25 mm",
+   "page": 43,
+   "bbox_pt": [
+    500.3,
+    139.4,
+    538.6,
+    151.4
+   ],
+   "ocr_brut": "A018 x5",
+   "citation": "NOTICE!p43!A018",
+   "lecture": "transcription visuelle, OCR conserve"
+  },
+  {
+   "ref": "A415",
+   "qty": 8,
+   "repere_visuel": "bande perforee",
+   "page": 43,
+   "bbox_pt": [
+    499.6,
+    190.5,
+    538.4,
+    203.5
+   ],
+   "ocr_brut": "A415 x8",
+   "citation": "NOTICE!p43!A415",
+   "lecture": "transcription visuelle, OCR conserve"
+  },
+  {
+   "ref": "A413",
+   "qty": 4,
+   "repere_visuel": "bande perforee",
+   "page": 43,
+   "bbox_pt": [
+    499.8,
+    232.0,
+    538.7,
+    244.0
+   ],
+   "ocr_brut": "A413 x4",
+   "citation": "NOTICE!p43!A413",
+   "lecture": "transcription visuelle, OCR conserve"
+  },
+  {
+   "ref": "A235",
+   "qty": 6,
+   "repere_visuel": "bande perforee",
+   "page": 43,
+   "bbox_pt": [
+    501.7,
+    258.4,
+    540.0,
+    271.4
+   ],
+   "ocr_brut": "A235 x6",
+   "citation": "NOTICE!p43!A235",
+   "lecture": "transcription visuelle, OCR conserve"
+  },
+  {
+   "ref": "A417",
+   "qty": 6,
+   "repere_visuel": "bande perforee",
+   "page": 43,
+   "bbox_pt": [
+    499.8,
+    279.3,
+    538.7,
+    292.3
+   ],
+   "ocr_brut": "A417 x6",
+   "citation": "NOTICE!p43!A417",
+   "lecture": "transcription visuelle, OCR conserve"
+  },
+  {
+   "ref": "C769",
+   "qty": 1,
+   "repere_visuel": "bande perforee",
+   "page": 43,
+   "bbox_pt": [
+    500.0,
+    301.1,
+    537.4,
+    315.1
+   ],
+   "ocr_brut": "c769 x1",
+   "citation": "NOTICE!p43!C769",
+   "lecture": "transcription visuelle, OCR conserve"
+  },
+  {
+   "ref": "C775",
+   "qty": 2,
+   "repere_visuel": "bande coudee",
+   "page": 43,
+   "bbox_pt": [
+    497.2,
+    327.0,
+    537.6,
+    341.0
+   ],
+   "ocr_brut": "c775 X2",
+   "citation": "NOTICE!p43!C775",
+   "lecture": "transcription visuelle, OCR conserve"
+  },
+  {
+   "ref": "A437",
+   "qty": 4,
+   "repere_visuel": "equerre",
+   "page": 43,
+   "bbox_pt": [
+    500.0,
+    361.4,
+    540.8,
+    373.4
+   ],
+   "ocr_brut": "A437 x4.",
+   "citation": "NOTICE!p43!A437",
+   "lecture": "transcription visuelle, OCR conserve"
+  },
+  {
+   "ref": "A416",
+   "qty": 1,
+   "repere_visuel": "bande",
+   "page": 43,
+   "bbox_pt": [
+    500.3,
+    384.4,
+    539.2,
+    396.4
+   ],
+   "ocr_brut": "A416 x11",
+   "citation": "NOTICE!p43!A416",
+   "lecture": "transcription visuelle, OCR conserve"
+  },
+  {
+   "ref": "C768",
+   "qty": 5,
+   "repere_visuel": "bande perforee",
+   "page": 43,
+   "bbox_pt": [
+    500.3,
+    409.4,
+    539.0,
+    422.4
+   ],
+   "ocr_brut": "c768 x5",
+   "citation": "NOTICE!p43!C768",
+   "lecture": "transcription visuelle, OCR conserve"
+  },
+  {
+   "ref": "A806",
+   "qty": 13,
+   "repere_visuel": "bande courte",
+   "page": 43,
+   "bbox_pt": [
+    490.4,
+    431.4,
+    538.4,
+    444.4
+   ],
+   "ocr_brut": "A806 x13",
+   "citation": "NOTICE!p43!A806",
+   "lecture": "transcription visuelle, OCR conserve"
+  },
+  {
+   "ref": "C483",
+   "qty": 2,
+   "repere_visuel": "equerre",
+   "page": 43,
+   "bbox_pt": [
+    500.5,
+    453.0,
+    539.2,
+    466.0
+   ],
+   "ocr_brut": "C483 x2",
+   "citation": "NOTICE!p43!C483",
+   "lecture": "transcription visuelle, OCR conserve"
+  },
+  {
+   "ref": "C330",
+   "qty": 4,
+   "repere_visuel": "equerre",
+   "page": 43,
+   "bbox_pt": [
+    500.5,
+    477.3,
+    539.6,
+    489.3
+   ],
+   "ocr_brut": "C330 x4",
+   "citation": "NOTICE!p43!C330",
+   "lecture": "transcription visuelle, OCR conserve"
+  },
+  {
+   "ref": "A012",
+   "qty": 2,
+   "repere_visuel": "equerre",
+   "page": 43,
+   "bbox_pt": [
+    498.1,
+    507.3,
+    536.8,
+    519.3
+   ],
+   "ocr_brut": "A012 x2",
+   "citation": "NOTICE!p43!A012",
+   "lecture": "transcription visuelle, OCR conserve"
+  },
+  {
+   "ref": "A423",
+   "qty": 2,
+   "repere_visuel": "support de train",
+   "page": 43,
+   "bbox_pt": [
+    496.2,
+    542.1,
+    535.1,
+    554.1
+   ],
+   "ocr_brut": "A423 x2",
+   "citation": "NOTICE!p43!A423",
+   "lecture": "transcription visuelle, OCR conserve"
+  },
+  {
+   "ref": "A247",
+   "qty": 2,
+   "repere_visuel": "vis B1 14,7 mm",
+   "page": 43,
+   "bbox_pt": [
+    756.6,
+    57.6,
+    795.6,
+    69.6
+   ],
+   "ocr_brut": "A247 x2",
+   "citation": "NOTICE!p43!A247",
+   "lecture": "transcription visuelle, OCR conserve"
+  },
+  {
+   "ref": "A511",
+   "qty": 29,
+   "repere_visuel": "vis S2 9,5 mm",
+   "page": 43,
+   "bbox_pt": [
+    746.8,
+    83.9,
+    794.7,
+    96.9
+   ],
+   "ocr_brut": "A511 x29",
+   "citation": "NOTICE!p43!A511",
+   "lecture": "transcription visuelle, OCR conserve"
+  },
+  {
+   "ref": "A637",
+   "qty": 56,
+   "repere_visuel": "vis S1 5,8 mm",
+   "page": 43,
+   "bbox_pt": [
+    746.8,
+    110.3,
+    794.9,
+    123.3
+   ],
+   "ocr_brut": "A637 x56",
+   "citation": "NOTICE!p43!A637",
+   "lecture": "transcription visuelle, OCR conserve"
+  },
+  {
+   "ref": "D005",
+   "qty": 10,
+   "repere_visuel": "rivet",
+   "page": 43,
+   "bbox_pt": [
+    747.0,
+    138.6,
+    794.9,
+    151.6
+   ],
+   "ocr_brut": "D005 x10",
+   "citation": "NOTICE!p43!D005",
+   "lecture": "transcription visuelle, OCR conserve"
+  },
+  {
+   "ref": "A337",
+   "qty": 73,
+   "repere_visuel": "ecrou carre",
+   "page": 43,
+   "bbox_pt": [
+    747.0,
+    166.5,
+    795.1,
+    179.5
+   ],
+   "ocr_brut": "A337 x73",
+   "citation": "NOTICE!p43!A337",
+   "lecture": "transcription visuelle, OCR conserve"
+  },
+  {
+   "ref": "D277",
+   "qty": 12,
+   "repere_visuel": "ecrou",
+   "page": 43,
+   "bbox_pt": [
+    747.0,
+    187.4,
+    795.1,
+    200.4
+   ],
+   "ocr_brut": "0277 x12",
+   "citation": "NOTICE!p43!D277",
+   "lecture": "transcription visuelle, OCR conserve"
+  },
+  {
+   "ref": "A138",
+   "qty": 8,
+   "repere_visuel": "rondelle",
+   "page": 43,
+   "bbox_pt": [
+    759.2,
+    205.6,
+    797.3,
+    217.6
+   ],
+   "ocr_brut": "A188 x8",
+   "citation": "NOTICE!p43!A138",
+   "lecture": "transcription visuelle, OCR conserve"
+  },
+  {
+   "ref": "A623",
+   "qty": 10,
+   "repere_visuel": "roue",
+   "page": 43,
+   "bbox_pt": [
+    747.2,
+    227.2,
+    795.2,
+    240.2
+   ],
+   "ocr_brut": "A623 x10",
+   "citation": "NOTICE!p43!A623",
+   "lecture": "transcription visuelle, OCR conserve"
+  },
+  {
+   "ref": "A238",
+   "qty": 2,
+   "repere_visuel": "entretoise",
+   "page": 43,
+   "bbox_pt": [
+    759.2,
+    247.8,
+    797.5,
+    260.8
+   ],
+   "ocr_brut": "A238 x2",
+   "citation": "NOTICE!p43!A238",
+   "lecture": "transcription visuelle, OCR conserve"
+  },
+  {
+   "ref": "A259",
+   "qty": 12,
+   "repere_visuel": "entretoise",
+   "page": 43,
+   "bbox_pt": [
+    747.2,
+    266.1,
+    795.4,
+    279.1
+   ],
+   "ocr_brut": "A259 x12",
+   "citation": "NOTICE!p43!A259",
+   "lecture": "transcription visuelle, OCR conserve"
+  },
+  {
+   "ref": "D010",
+   "qty": 4,
+   "repere_visuel": "agrafe",
+   "page": 43,
+   "bbox_pt": [
+    757.6,
+    289.1,
+    796.4,
+    302.1
+   ],
+   "ocr_brut": "D010 x4",
+   "citation": "NOTICE!p43!D010",
+   "lecture": "transcription visuelle, OCR conserve"
+  },
+  {
+   "ref": "C994",
+   "qty": 1,
+   "repere_visuel": "tournevis",
+   "page": 43,
+   "bbox_pt": [
+    764.8,
+    479.0,
+    798.9,
+    491.0
+   ],
+   "ocr_brut": "c994 x1",
+   "citation": "NOTICE!p43!C994",
+   "lecture": "transcription visuelle, OCR conserve"
+  },
+  {
+   "ref": "C993",
+   "qty": 1,
+   "repere_visuel": "cle de serrage",
+   "page": 43,
+   "bbox_pt": [
+    764.8,
+    524.8,
+    800.3,
+    536.8
+   ],
+   "ocr_brut": "c993 x11",
+   "citation": "NOTICE!p43!C993",
+   "lecture": "transcription visuelle, OCR conserve"
+  },
+  {
+   "ref": null,
+   "qty": 1,
+   "repere_visuel": "planche d'autocollants (aucune reference imprimee)",
+   "page": 43,
+   "bbox_pt": null,
+   "ocr_brut": null,
+   "citation": "NOTICE!p43!AUTOCOLLANTS",
+   "lecture": "transcription visuelle"
+  }
+ ],
+ "contenu_p3": {
+  "citation": "NOTICE!p3!CONTENU",
+  "page": 3,
+  "offset_texte": 232,
+  "extrait_ocr": "FR. Contenu  : 304 pieces, 2 vrais outils, 1 boitier électronique, 1 feuillet d'autocollants, 1 notice de montage pour 1 modéle."
+ },
+ "exemple_etape_poste": {
+  "citation": "NOTICE!p12!ETAPE10",
+  "page": 12,
+  "constat": "Etape 10 de la notice relue visuellement : 2 bandes longues, 1 bande 5 trous, 2 bandes courtes, 1 vis S2, 2 vis S1, 3 ecrous, 1 plaque triangulaire, soit 12 pieces.",
+  "statut": "Comparaison ponctuelle. La correspondance generale etape/poste n'est pas documentee."
+ }
+}

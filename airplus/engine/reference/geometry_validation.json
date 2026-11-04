@@ -1,0 +1,32 @@
+{
+ "source_step": "Boeing 787 A_ (1).stp",
+ "source_gltf": "Boeing 787 A_.gltf",
+ "missing_in_delivery": "Boeing 787 A_.bin (reference par le glTF, absent)",
+ "tessellation": {
+  "linear_deflection_mm": 0.1,
+  "angular_deflection_rad": 0.5
+ },
+ "gltf_reference": {
+  "nodes": 109,
+  "meshes": 99,
+  "noeuds_vers_maillage_inexistant": [
+   {
+    "node": "Symétrie de Symétrie de D142.1",
+    "mesh": 99
+   },
+   {
+    "node": "Symétrie de Symétrie de A437.1",
+    "mesh": 100
+   }
+  ]
+ },
+ "glb_produit": {
+  "nodes": 111,
+  "meshes": 99,
+  "occurrences_maillees": 99,
+  "triangles": 107122
+ },
+ "maillages_compares": 99,
+ "ecart_max_bbox_m": 4.37e-05,
+ "maillages_ecart_sup_0_1mm": []
+}

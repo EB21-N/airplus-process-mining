@@ -1,0 +1,6 @@
+# Execution : aucune installation requise, ces paquets purs Python sont livres dans vendor/.
+openpyxl==3.1.5
+et_xmlfile==2.0.0
+# Outils de build uniquement (tools/), jamais requis pour lancer le dashboard :
+#   build_geometry.py : cadquery-ocp, numpy
+#   build_reference.py : pymupdf

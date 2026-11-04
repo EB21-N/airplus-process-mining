@@ -1,0 +1,9 @@
+# Les classeurs sources contiennent des noms : jamais dans le dépôt.
+*.xlsx
+*.xls
+workspace/
+__pycache__/
+*.pyc
+dist/
+.DS_Store
+Thumbs.db

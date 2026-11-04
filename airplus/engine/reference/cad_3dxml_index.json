@@ -1,0 +1,348 @@
+{
+ "source": "Projet_Innovation_4_All_STEP_A.3dxml (PRODUCT.3dxml)",
+ "references": 81,
+ "instances": 106,
+ "note": "Version et maturite du modele CAO. Ces attributs ne relient ni un avion, ni un lot, ni une operation MES.",
+ "par_nom": {
+  "A012": {
+   "version": "A",
+   "maturity": "IN_WORK",
+   "instances": 1
+  },
+  "A018": {
+   "version": "A",
+   "maturity": "IN_WORK",
+   "instances": 1
+  },
+  "A235": {
+   "version": "A",
+   "maturity": "IN_WORK",
+   "instances": 3
+  },
+  "A259": {
+   "version": "A",
+   "maturity": "IN_WORK",
+   "instances": 2
+  },
+  "A413": {
+   "version": "A",
+   "maturity": "IN_WORK",
+   "instances": 2
+  },
+  "A413 modifié": {
+   "version": "A",
+   "maturity": "IN_WORK",
+   "instances": 1
+  },
+  "A415": {
+   "version": "A",
+   "maturity": "IN_WORK",
+   "instances": 4
+  },
+  "A416": {
+   "version": "A",
+   "maturity": "IN_WORK",
+   "instances": 1
+  },
+  "A417": {
+   "version": "A",
+   "maturity": "IN_WORK",
+   "instances": 3
+  },
+  "A437": {
+   "version": "A",
+   "maturity": "IN_WORK",
+   "instances": 1
+  },
+  "A806": {
+   "version": "A",
+   "maturity": "IN_WORK",
+   "instances": 9
+  },
+  "Aileron de queue": {
+   "version": "A",
+   "maturity": "IN_WORK",
+   "instances": 1
+  },
+  "Ailerons gauche": {
+   "version": "A",
+   "maturity": "IN_WORK",
+   "instances": 1
+  },
+  "Ailes": {
+   "version": "A",
+   "maturity": "IN_WORK",
+   "instances": 1
+  },
+  "C330": {
+   "version": "A",
+   "maturity": "IN_WORK",
+   "instances": 2
+  },
+  "C483": {
+   "version": "A",
+   "maturity": "IN_WORK",
+   "instances": 1
+  },
+  "C768": {
+   "version": "A",
+   "maturity": "IN_WORK",
+   "instances": 3
+  },
+  "C769": {
+   "version": "A",
+   "maturity": "IN_WORK",
+   "instances": 1
+  },
+  "C775 modifié": {
+   "version": "A",
+   "maturity": "IN_WORK",
+   "instances": 1
+  },
+  "Corps / Cabines": {
+   "version": "A",
+   "maturity": "IN_WORK",
+   "instances": 1
+  },
+  "D088": {
+   "version": "A",
+   "maturity": "IN_WORK",
+   "instances": 1
+  },
+  "D116 modified": {
+   "version": "A",
+   "maturity": "IN_WORK",
+   "instances": 1
+  },
+  "D117 modifié": {
+   "version": "A",
+   "maturity": "IN_WORK",
+   "instances": 1
+  },
+  "D122 modifié": {
+   "version": "A",
+   "maturity": "IN_WORK",
+   "instances": 1
+  },
+  "D142": {
+   "version": "A",
+   "maturity": "IN_WORK",
+   "instances": 1
+  },
+  "D144": {
+   "version": "A",
+   "maturity": "IN_WORK",
+   "instances": 1
+  },
+  "D278": {
+   "version": "A",
+   "maturity": "IN_WORK",
+   "instances": 1
+  },
+  "Joint train cental rubber": {
+   "version": "A",
+   "maturity": "IN_WORK",
+   "instances": 1
+  },
+  "Joint train cental steel": {
+   "version": "A",
+   "maturity": "IN_WORK",
+   "instances": 1
+  },
+  "Nez": {
+   "version": "A",
+   "maturity": "IN_WORK",
+   "instances": 1
+  },
+  "Projet_Innovation_4_All_STEP": {
+   "version": "A",
+   "maturity": "IN_WORK",
+   "instances": 0
+  },
+  "Roue A623": {
+   "version": "A",
+   "maturity": "IN_WORK",
+   "instances": 1
+  },
+  "Symétrie de A012": {
+   "version": "A",
+   "maturity": "IN_WORK",
+   "instances": 1
+  },
+  "Symétrie de A235": {
+   "version": "A",
+   "maturity": "IN_WORK",
+   "instances": 3
+  },
+  "Symétrie de A259": {
+   "version": "A",
+   "maturity": "IN_WORK",
+   "instances": 2
+  },
+  "Symétrie de A413 modifié": {
+   "version": "A",
+   "maturity": "IN_WORK",
+   "instances": 1
+  },
+  "Symétrie de A415": {
+   "version": "A",
+   "maturity": "IN_WORK",
+   "instances": 4
+  },
+  "Symétrie de A417": {
+   "version": "A",
+   "maturity": "IN_WORK",
+   "instances": 3
+  },
+  "Symétrie de A437": {
+   "version": "A",
+   "maturity": "IN_WORK",
+   "instances": 2
+  },
+  "Symétrie de A806": {
+   "version": "A",
+   "maturity": "IN_WORK",
+   "instances": 4
+  },
+  "Symétrie de Ailes": {
+   "version": "A",
+   "maturity": "IN_WORK",
+   "instances": 1
+  },
+  "Symétrie de C330": {
+   "version": "A",
+   "maturity": "IN_WORK",
+   "instances": 2
+  },
+  "Symétrie de C483": {
+   "version": "A",
+   "maturity": "IN_WORK",
+   "instances": 1
+  },
+  "Symétrie de C768": {
+   "version": "A",
+   "maturity": "IN_WORK",
+   "instances": 2
+  },
+  "Symétrie de C775 modifié": {
+   "version": "A",
+   "maturity": "IN_WORK",
+   "instances": 1
+  },
+  "Symétrie de D088": {
+   "version": "A",
+   "maturity": "IN_WORK",
+   "instances": 2
+  },
+  "Symétrie de D116 modified": {
+   "version": "A",
+   "maturity": "IN_WORK",
+   "instances": 1
+  },
+  "Symétrie de D117 modifié": {
+   "version": "A",
+   "maturity": "IN_WORK",
+   "instances": 1
+  },
+  "Symétrie de D122 modifié": {
+   "version": "A",
+   "maturity": "IN_WORK",
+   "instances": 1
+  },
+  "Symétrie de D142": {
+   "version": "A",
+   "maturity": "IN_WORK",
+   "instances": 2
+  },
+  "Symétrie de D144": {
+   "version": "A",
+   "maturity": "IN_WORK",
+   "instances": 1
+  },
+  "Symétrie de Joint train cental rubber": {
+   "version": "A",
+   "maturity": "IN_WORK",
+   "instances": 1
+  },
+  "Symétrie de Joint train cental steel": {
+   "version": "A",
+   "maturity": "IN_WORK",
+   "instances": 2
+  },
+  "Symétrie de Roue A623": {
+   "version": "A",
+   "maturity": "IN_WORK",
+   "instances": 1
+  },
+  "Symétrie de Symétrie de A437": {
+   "version": "A",
+   "maturity": "IN_WORK",
+   "instances": 1
+  },
+  "Symétrie de Symétrie de D088": {
+   "version": "A",
+   "maturity": "IN_WORK",
+   "instances": 2
+  },
+  "Symétrie de Symétrie de D142": {
+   "version": "A",
+   "maturity": "IN_WORK",
+   "instances": 1
+  },
+  "Symétrie de Symétrie de Joint train cental steel": {
+   "version": "A",
+   "maturity": "IN_WORK",
+   "instances": 2
+  },
+  "Symétrie de Symétrie de Symétrie de D088": {
+   "version": "A",
+   "maturity": "IN_WORK",
+   "instances": 1
+  },
+  "Symétrie de Symétrie de Symétrie de Joint train cental steel": {
+   "version": "A",
+   "maturity": "IN_WORK",
+   "instances": 1
+  },
+  "Symétrie de Train d'atterissage central": {
+   "version": "A",
+   "maturity": "IN_WORK",
+   "instances": 1
+  },
+  "Symétrie de nez avion": {
+   "version": "A",
+   "maturity": "IN_WORK",
+   "instances": 1
+  },
+  "Train d'atterissage central": {
+   "version": "A",
+   "maturity": "IN_WORK",
+   "instances": 1
+  },
+  "Train d'atterrissage avant": {
+   "version": "A",
+   "maturity": "IN_WORK",
+   "instances": 1
+  },
+  "nez avion": {
+   "version": "A",
+   "maturity": "IN_WORK",
+   "instances": 1
+  },
+  "nez avion001": {
+   "version": "A",
+   "maturity": "IN_WORK",
+   "instances": 1
+  },
+  "nez avion002": {
+   "version": "A",
+   "maturity": "IN_WORK",
+   "instances": 1
+  },
+  "nez avion003": {
+   "version": "A",
+   "maturity": "IN_WORK",
+   "instances": 1
+  }
+ }
+}
